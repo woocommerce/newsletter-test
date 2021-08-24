@@ -1,0 +1,52 @@
+{
+  "name": "woocommerce-newsletter-test",
+  "title": "WooCommerce Newsletter Test",
+  "version": "1.0.0",
+  "description": "Test the i2 integration",
+  "license": "GPL-3.0+",
+  "homepage": "https://github.com/opr/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/woocommerce/woocommerce-gutenberg-products-block.git"
+  },
+  "devDependencies": {
+    "@automattic/color-studio": "^2.5.0",
+    "@woocommerce/dependency-extraction-webpack-plugin": "1.1.0",
+    "@woocommerce/eslint-plugin": "1.0.0-beta.0",
+    "@wordpress/i18n": "3.15.0",
+    "@wordpress/scripts": "^16.1.1",
+    "node-wp-i18n": "~1.2.3"
+  },
+  "scripts": {
+    "prebuild": "rm -rf ./vendor",
+    "build": "npm run build:js && composer install --no-dev && npm run makepot && npm run archive",
+    "build:dev": "composer install && npm run makepot",
+    "build:js": "wp-scripts build assets/js/index.js",
+    "archive": "composer archive --file=$npm_package_name --format=zip",
+    "postarchive": "rm -rf $npm_package_name && unzip $npm_package_name.zip -d $npm_package_name && rm $npm_package_name.zip && zip -r $npm_package_name.zip $npm_package_name && rm -rf $npm_package_name",
+    "check-engines": "wp-scripts che  ck-engines",
+    "check-licenses": "wp-scripts check-licenses",
+    "format:js": "wp-scripts format-js",
+    "lint:css": "wp-scripts lint-style assets/js",
+    "lint:js": "wp-scripts lint-js assets/js",
+    "lint:js-fix": "eslint assets/js --ext=js,jsx,ts,tsx --fix",
+    "start": "wp-scripts start assets/js/index.ts",
+    "test:unit": "wp-scripts test-unit-js",
+    "makepot": "wpi18n makepot --domain-path languages --pot-file woocommerce-points-and-rewards.pot --type plugin --main-file woocommerce-points-and-rewards.php --exclude node_modules,tests,docs"
+  },
+  "engines": {
+    "node": ">=8.9.3",
+    "npm": ">=5.5.1"
+  },
+  "config": {
+    "translate": true
+  },
+  "dependencies": {
+    "@wordpress/api-fetch": "^5.0.0",
+    "@wordpress/dependency-extraction-webpack-plugin": "^3.0.1",
+    "@wordpress/element": "^3.0.0",
+    "@wordpress/html-entities": "^3.2.1",
+    "@wordpress/plugins": "^2.24.2",
+    "classnames": "^2.3.1"
+  }
+}
