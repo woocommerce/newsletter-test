@@ -18,6 +18,14 @@
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
+$version = '1.0.0';
+function get_file_version( $file ) {
+	global $version;
+	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && file_exists( $file ) ) {
+		return filemtime( $file );
+	}
+	return $version;
+}
 /**
  * Newsletter field integration
  */
@@ -45,5 +53,37 @@ add_action(
 				},
 			)
 		);
+		$asset_api            = \Automattic\WooCommerce\Blocks\Package::container()->get( \Automattic\WooCommerce\Blocks\Assets\Api::class );
+		$assets_data_registry = \Automattic\WooCommerce\Blocks\Package::container()->get( \Automattic\WooCommerce\Blocks\Assets\AssetDataRegistry::class );
+		new \Automattic\WooCommerce\Blocks\BlockTypes\AtomicBlock(
+			$asset_api,
+			$assets_data_registry,
+			new \Automattic\WooCommerce\Blocks\Integrations\IntegrationRegistry(),
+			'checkout-newsletter-subscription-block'
+		);
 	}
 );
+
+add_action( 'plugins_loaded', function() {
+	$script_path = '/build/index.js';
+	//$style_path  = '/build/style-index.css';
+
+	$script_url = plugins_url( $script_path, __FILE__ );
+	//$style_url  = plugins_url( $style_path, __FILE__ );
+
+	$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
+	$script_asset      = file_exists( $script_asset_path )
+		? require $script_asset_path
+		: array(
+			'dependencies' => array(),
+			'version'      => get_file_version( $script_asset_path ),
+		);
+
+	wp_enqueue_script(
+		'newsletter-test',
+		$script_url,
+		$script_asset['dependencies'],
+		$script_asset['version'],
+		true
+	);
+} );

@@ -7,9 +7,9 @@ import {
 	useCheckoutSubmit,
 	useCheckoutExtensionData,
 } from '@woocommerce/base-context/hooks';
-import CheckboxControl from '@woocommerce/base-components/checkbox-control';
+import { CheckboxControl } from '@wordpress/components';
 
-const Block = (): JSX.Element => {
+const Block = () => {
 	const [ checked, setChecked ] = useState( false );
 	const { isDisabled } = useCheckoutSubmit();
 	const { setExtensionData } = useCheckoutExtensionData();
@@ -22,18 +22,13 @@ const Block = (): JSX.Element => {
 		<CheckboxControl
 			id="subscribe-to-newsletter"
 			checked={ checked }
+			label={ __(
+				'I want to receive updates about products and promotions.',
+				'woo-gutenberg-products-block'
+			) }
 			onChange={ () => setChecked( ( value ) => ! value ) }
 			disabled={ isDisabled }
-		>
-			<span
-				dangerouslySetInnerHTML={ {
-					__html: __(
-						'I want to receive updates about products and promotions.',
-						'woo-gutenberg-products-block'
-					),
-				} }
-			/>
-		</CheckboxControl>
+		/>
 	);
 };
 

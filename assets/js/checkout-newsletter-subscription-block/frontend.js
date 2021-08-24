@@ -3,7 +3,7 @@
  */
 import Block from './block';
 
-const FrontendBlock = (): JSX.Element => {
+const FrontendBlock = () => {
 	return <Block />;
 };
 

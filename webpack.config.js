@@ -4,14 +4,16 @@ const WooCommerceDependencyExtractionWebpackPlugin = require( '@wordpress/depend
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 const wcDepMap = {
-	'@woocommerce/blocks-registry': [ 'wc', 'blocksRegistry' ],
 	'@woocommerce/blocks-checkout': [ 'wc', 'blocksCheckout' ],
+	'@woocommerce/blocks-registry': [ 'wc', 'wcBlocksRegistry' ],
+	'@woocommerce/base-context/hooks': [ 'wc', 'wcBlocksBaseContextHooks' ],
 	'@woocommerce/settings': [ 'wc', 'wcSettings' ],
 };
 
 const wcHandleMap = {
 	'@woocommerce/blocks-checkout': 'wc-blocks-checkout',
 	'@woocommerce/blocks-registry': 'wc-blocks-registry',
+	'@woocommerce/base-context/hooks': 'wc-blocks-base-context-hooks',
 	'@woocommerce/settings': 'wc-settings',
 };
 
@@ -34,10 +36,17 @@ const defaultRules = defaultConfig.module.rules.filter( ( rule ) => {
 
 module.exports = {
 	...defaultConfig,
+	resolve: {
+		extensions: [ '.ts', '.tsx', '.js', '.jsx' ],
+	},
 	module: {
 		...defaultConfig.module,
 		rules: [
 			...defaultRules,
+			{
+				test: /\.tsx?$/,
+				loader: 'ts-loader',
+			},
 			{
 				test: /\.(sc|sa)ss$/,
 				exclude: /node_modules/,

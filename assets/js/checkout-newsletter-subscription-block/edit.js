@@ -10,7 +10,7 @@ import { PanelBody, Disabled } from '@wordpress/components';
  */
 import Block from './block';
 
-export const Edit = (): JSX.Element => {
+export const Edit = () => {
 	return (
 		<>
 			<InspectorControls>
@@ -30,6 +30,6 @@ export const Edit = (): JSX.Element => {
 	);
 };
 
-export const Save = (): JSX.Element => {
+export const Save = () => {
 	return <div { ...useBlockProps.save() } />;
 };
