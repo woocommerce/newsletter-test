@@ -48,6 +48,11 @@ add_action(
 							'description' => __( 'Subscribe to newsletter opt-in.', 'woo-gutenberg-products-block' ),
 							'type'        => 'boolean',
 							'context'     => array(),
+							'arg_options' => array(
+								'validate_callback' => function( $value ) {
+									return new \WP_Error( 'api-error', ( $value ? 'true' : 'false' ) . ' was posted to the newsletter validation callback' );
+								},
+							),
 						),
 					);
 				},
@@ -61,10 +66,22 @@ add_action(
 			new \Automattic\WooCommerce\Blocks\Integrations\IntegrationRegistry(),
 			'checkout-newsletter-subscription-block'
 		);
+
+		if ( is_callable( [ $extend, 'register_update_callback' ] ) ) {
+			$extend->register_update_callback(
+				array(
+					'namespace' => 'newsletter-test',
+					'callback'  => 'mark_newsletter_signup_checked',
+				)
+			);
+		}
 	}
 );
 
-add_action( 'plugins_loaded', function() {
+function mark_newsletter_signup_checked( $data ) {
+}
+
+add_action( 'wp_enqueue_scripts', function() {
 	$script_path = '/build/index.js';
 	//$style_path  = '/build/style-index.css';
 

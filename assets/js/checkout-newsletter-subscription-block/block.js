@@ -3,16 +3,12 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
-import {
-	useCheckoutSubmit,
-	useCheckoutExtensionData,
-} from '@woocommerce/base-context/hooks';
 import { CheckboxControl } from '@wordpress/components';
 
-const Block = () => {
+const Block = ( { checkoutSubmitData, checkoutExtensionData } ) => {
 	const [ checked, setChecked ] = useState( false );
-	const { isDisabled } = useCheckoutSubmit();
-	const { setExtensionData } = useCheckoutExtensionData();
+	const { isDisabled } = checkoutSubmitData;
+	const { setExtensionData } = checkoutExtensionData;
 
 	useEffect( () => {
 		setExtensionData( 'newsletter-extension', 'newsletter', checked );
@@ -26,7 +22,10 @@ const Block = () => {
 				'I want to receive updates about products and promotions.',
 				'woo-gutenberg-products-block'
 			) }
-			onChange={ () => setChecked( ( value ) => ! value ) }
+			onChange={ ( value ) => {
+				setChecked( value );
+				console.log( value );
+			} }
 			disabled={ isDisabled }
 		/>
 	);

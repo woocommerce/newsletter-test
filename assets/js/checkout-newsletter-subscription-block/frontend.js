@@ -3,8 +3,8 @@
  */
 import Block from './block';
 
-const FrontendBlock = () => {
-	return <Block />;
+const FrontendBlock = ( props ) => {
+	return <Block { ...props } />;
 };
 
 export default FrontendBlock;
