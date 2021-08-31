@@ -11,6 +11,9 @@ import { PanelBody, Disabled } from '@wordpress/components';
 import Block from './block';
 
 export const Edit = () => {
+	const previewExtensionData = {
+		setExtensionData: () => {}
+	};
 	return (
 		<>
 			<InspectorControls>
@@ -24,7 +27,7 @@ export const Edit = () => {
 				</PanelBody>
 			</InspectorControls>
 			<Disabled>
-				<Block />
+				<Block checkoutExtensionData={ previewExtensionData } />
 			</Disabled>
 		</>
 	);
