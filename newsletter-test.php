@@ -80,8 +80,7 @@ add_action(
 
 function mark_newsletter_signup_checked( $data ) {
 }
-
-add_action( 'wp_enqueue_scripts', function() {
+function register_scripts() {
 	$script_path = '/build/index.js';
 	//$style_path  = '/build/style-index.css';
 
@@ -103,4 +102,7 @@ add_action( 'wp_enqueue_scripts', function() {
 		$script_asset['version'],
 		true
 	);
-} );
+}
+
+add_action( 'wp_enqueue_scripts', 'register_scripts' );
+add_action( 'admin_enqueue_scripts', 'register_scripts' );
