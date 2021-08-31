@@ -5,9 +5,8 @@ import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
 import { CheckboxControl } from '@wordpress/components';
 
-const Block = ( { checkoutSubmitData, checkoutExtensionData } ) => {
+const Block = ( { checkoutExtensionData } ) => {
 	const [ checked, setChecked ] = useState( false );
-	const { isDisabled } = checkoutSubmitData;
 	const { setExtensionData } = checkoutExtensionData;
 
 	useEffect( () => {
@@ -24,9 +23,7 @@ const Block = ( { checkoutSubmitData, checkoutExtensionData } ) => {
 			) }
 			onChange={ ( value ) => {
 				setChecked( value );
-				console.log( value );
 			} }
-			disabled={ isDisabled }
 		/>
 	);
 };
