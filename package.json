@@ -20,8 +20,8 @@
   },
   "scripts": {
     "prebuild": "rm -rf ./vendor",
-    "build": "npm run build:js && composer install --no-dev && npm run makepot && npm run archive",
-    "build:dev": "composer install && npm run makepot",
+    "build": "npm run build:js && npm run makepot && npm run archive",
+    "build:dev": "pm run makepot",
     "build:js": "wp-scripts build assets/js/index.js",
     "archive": "composer archive --file=$npm_package_name --format=zip",
     "postarchive": "rm -rf $npm_package_name && unzip $npm_package_name.zip -d $npm_package_name && rm $npm_package_name.zip && zip -r $npm_package_name.zip $npm_package_name && rm -rf $npm_package_name",
