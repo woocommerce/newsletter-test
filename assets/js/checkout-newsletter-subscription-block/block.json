@@ -1,0 +1,17 @@
+{
+	"name": "woocommerce/checkout-newsletter-subscription-block",
+	"version": "1.0.0",
+	"title": "Newsletter Subscription!",
+	"category": "woocommerce",
+	"description": "Adds a newsletter subscription checkbox to the checkout.",
+	"supports": {
+		"html": false,
+		"align": false,
+		"multiple": false,
+		"reusable": false
+	},
+	"parent": [
+		"woocommerce/checkout-contact-information-block"		
+	],
+	"textdomain": "woocommerce-blocks-newsletter-test"
+}

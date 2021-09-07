@@ -58,15 +58,6 @@ add_action(
 				},
 			)
 		);
-		$asset_api            = \Automattic\WooCommerce\Blocks\Package::container()->get( \Automattic\WooCommerce\Blocks\Assets\Api::class );
-		$assets_data_registry = \Automattic\WooCommerce\Blocks\Package::container()->get( \Automattic\WooCommerce\Blocks\Assets\AssetDataRegistry::class );
-		new \Automattic\WooCommerce\Blocks\BlockTypes\AtomicBlock(
-			$asset_api,
-			$assets_data_registry,
-			new \Automattic\WooCommerce\Blocks\Integrations\IntegrationRegistry(),
-			'checkout-newsletter-subscription-block'
-		);
-
 		if ( is_callable( [ $extend, 'register_update_callback' ] ) ) {
 			$extend->register_update_callback(
 				array(
@@ -80,13 +71,10 @@ add_action(
 
 function mark_newsletter_signup_checked( $data ) {
 }
+
 function register_scripts() {
-	$script_path = '/build/index.js';
-	//$style_path  = '/build/style-index.css';
-
-	$script_url = plugins_url( $script_path, __FILE__ );
-	//$style_url  = plugins_url( $style_path, __FILE__ );
-
+	$script_path       = '/build/index.js';
+	$script_url        = plugins_url( $script_path, __FILE__ );
 	$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
 	$script_asset      = file_exists( $script_asset_path )
 		? require $script_asset_path
