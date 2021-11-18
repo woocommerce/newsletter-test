@@ -1,9 +1,7 @@
 /**
  * External dependencies
  */
-import { __ } from '@wordpress/i18n';
 import { SVG } from '@wordpress/components';
-import { registerCheckoutBlock } from '@woocommerce/blocks-checkout';
 import { registerBlockType } from '@wordpress/blocks';
 
 /**
@@ -11,8 +9,7 @@ import { registerBlockType } from '@wordpress/blocks';
  */
 import { Edit, Save } from './edit';
 import metadata from './block.json';
-import FrontendBlock from './frontend';
-
+import attributes from './attributes';
 registerBlockType( metadata, {
 	icon: {
 		src: (
@@ -34,9 +31,8 @@ registerBlockType( metadata, {
 	},
 	edit: Edit,
 	save: Save,
-} );
-
-registerCheckoutBlock( {
-	metadata,
-	component: FrontendBlock,
+	attributes: {
+		...metadata.attributes,
+		...attributes,
+	},
 } );
