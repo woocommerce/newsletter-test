@@ -24,6 +24,5 @@
 		}
 	},
 	"textdomain": "newsletter-test",
-	"editorScript": "file:../../../build/newsletter-block.js",
 	"editorStyle": "file:../../../build/style-newsletter-block.css"
 }
