@@ -9,11 +9,12 @@ import {
 } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
 import { CheckboxControl } from '@woocommerce/blocks-checkout';
-
+import { getSetting } from '@woocommerce/settings';
 /**
  * Internal dependencies
  */
 import './style.scss';
+const { optinDefaultText } = getSetting( 'newsletter-test_data', '' );
 
 export const Edit = ( { attributes, setAttributes } ) => {
 	const { text } = attributes;
@@ -31,13 +32,18 @@ export const Edit = ( { attributes, setAttributes } ) => {
 				disabled={ true }
 			/>
 			<RichText
-				value={ text }
+				value={ text || optinDefaultText }
 				onChange={ ( value ) => setAttributes( { text: value } ) }
 			/>
 		</div>
 	);
 };
 
-export const Save = () => {
-	return <div { ...useBlockProps.save() } />;
+export const Save = ( { attributes } ) => {
+	const { text } = attributes;
+	return (
+		<div { ...useBlockProps.save() }>
+			<RichText.Content value={ text } />
+		</div>
+	);
 };

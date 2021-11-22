@@ -9,7 +9,6 @@ import { registerBlockType } from '@wordpress/blocks';
  */
 import { Edit, Save } from './edit';
 import metadata from './block.json';
-import attributes from './attributes';
 registerBlockType( metadata, {
 	icon: {
 		src: (
@@ -31,8 +30,4 @@ registerBlockType( metadata, {
 	},
 	edit: Edit,
 	save: Save,
-	attributes: {
-		...metadata.attributes,
-		...attributes,
-	},
 } );
