@@ -2,37 +2,48 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, Disabled } from '@wordpress/components';
-
+import {
+	useBlockProps,
+	RichText,
+	InspectorControls,
+} from '@wordpress/block-editor';
+import { PanelBody } from '@wordpress/components';
+import { CheckboxControl } from '@woocommerce/blocks-checkout';
+import { getSetting } from '@woocommerce/settings';
 /**
  * Internal dependencies
  */
-import Block from './block';
+import './style.scss';
+const { optinDefaultText } = getSetting( 'newsletter-test_data', '' );
 
-export const Edit = () => {
-	const previewExtensionData = {
-		setExtensionData: () => {}
-	};
+export const Edit = ( { attributes, setAttributes } ) => {
+	const { text } = attributes;
+	const blockProps = useBlockProps();
 	return (
-		<>
+		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody
-					title={ __(
-						'Block options',
-						'woo-gutenberg-products-block'
-					) }
-				>
+				<PanelBody title={ __( 'Block options', 'newsletter-test' ) }>
 					Options for the block go here.
 				</PanelBody>
 			</InspectorControls>
-			<Disabled>
-				<Block checkoutExtensionData={ previewExtensionData } />
-			</Disabled>
-		</>
+			<CheckboxControl
+				id="newsletter-text"
+				checked={ false }
+				disabled={ true }
+			/>
+			<RichText
+				value={ text || optinDefaultText }
+				onChange={ ( value ) => setAttributes( { text: value } ) }
+			/>
+		</div>
 	);
 };
 
-export const Save = () => {
-	return <div { ...useBlockProps.save() } />;
+export const Save = ( { attributes } ) => {
+	const { text } = attributes;
+	return (
+		<div { ...useBlockProps.save() }>
+			<RichText.Content value={ text } />
+		</div>
+	);
 };

@@ -1,10 +1,14 @@
 /**
+ * External dependencies
+ */
+import { registerCheckoutBlock } from '@woocommerce/blocks-checkout';
+/**
  * Internal dependencies
  */
 import Block from './block';
+import metadata from './block.json';
 
-const FrontendBlock = ( props ) => {
-	return <Block { ...props } />;
-};
-
-export default FrontendBlock;
+registerCheckoutBlock( {
+	metadata,
+	component: Block,
+} );
