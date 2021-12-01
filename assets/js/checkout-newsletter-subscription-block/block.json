@@ -21,9 +21,14 @@
 				"remove": true,
 				"move": true
 			}
+		},
+		"text": {
+			"type": "string",
+			"source": "html",
+			"selector": ".wp-block-woocommerce-checkout-newsletter-subscription",
+			"default": ""
 		}
 	},
 	"textdomain": "newsletter-test",
-	"editorScript": "file:../../../build/newsletter-block.js",
 	"editorStyle": "file:../../../build/style-newsletter-block.css"
 }

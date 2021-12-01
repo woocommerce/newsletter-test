@@ -4,7 +4,7 @@ use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 use Automattic\WooCommerce\Blocks\Package;
 use Automattic\WooCommerce\Blocks\Domain\Services\ExtendRestApi;
 use Automattic\WooCommerce\Blocks\StoreApi\Schemas\CheckoutSchema;
-use Automattic\WooCommerce\Blocks\Integrations\IntegrationRegistry;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -29,6 +29,7 @@ class Newsletter_Blocks_Integration implements IntegrationInterface {
 	 */
 	public function initialize() {
 		$this->register_frontend_scripts();
+		$this->register_editor_scripts();
 		$this->register_editor_blocks();
 		$this->extend_store_api();
 		add_filter( '__experimental_woocommerce_blocks_add_data_attributes_to_block', [ $this, 'add_attributes_to_frontend_blocks' ], 10, 1 );
@@ -58,6 +59,32 @@ class Newsletter_Blocks_Integration implements IntegrationInterface {
 			dirname( __FILE__ ) . '/languages'
 		);
 	}
+
+	public function register_editor_scripts() {
+		$script_path       = '/build/newsletter-block.js';
+		$script_url        = plugins_url( $script_path, __FILE__ );
+		$script_asset_path = dirname( __FILE__ ) . '/build/newsletter-block.asset.php';
+		$script_asset      = file_exists( $script_asset_path )
+			? require $script_asset_path
+			: array(
+				'dependencies' => array(),
+				'version'      => $this->get_file_version( $script_asset_path ),
+			);
+
+		wp_register_script(
+			'newsletter-test-editor',
+			$script_url,
+			$script_asset['dependencies'],
+			$script_asset['version'],
+			true
+		);
+
+		wp_set_script_translations(
+			'newsletter-test-editor', // script handle
+			'newsletter-test', // text domain
+			dirname( __FILE__ ) . '/languages'
+		);
+	}
 	/**
 	 * Returns an array of script handles to enqueue in the frontend context.
 	 *
@@ -73,7 +100,7 @@ class Newsletter_Blocks_Integration implements IntegrationInterface {
 	 * @return string[]
 	 */
 	public function get_editor_script_handles() {
-		return array();
+		return array( 'newsletter-test-editor' );
 	}
 
 	/**
@@ -93,7 +120,9 @@ class Newsletter_Blocks_Integration implements IntegrationInterface {
 	 * Register blocks.
 	 */
 	public function register_editor_blocks() {
-		register_block_type( dirname( __FILE__ ) . '/assets/js/checkout-newsletter-subscription-block' );
+		register_block_type( dirname( __FILE__ ) . '/assets/js/checkout-newsletter-subscription-block', array(
+			'editor_script' => 'newsletter-test-editor',
+		) );
 	}
 
 	/**
