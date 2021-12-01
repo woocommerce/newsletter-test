@@ -21,6 +21,12 @@
 				"remove": true,
 				"move": true
 			}
+		},
+		"text": {
+			"type": "string",
+			"source": "html",
+			"selector": ".wp-block-woocommerce-checkout-newsletter-subscription",
+			"default": ""
 		}
 	},
 	"textdomain": "newsletter-test",

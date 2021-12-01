@@ -19,24 +19,27 @@
  */
 
 define( 'NEWSLETTER_VERSION', '2.0.0' );
-if ( class_exists( '\Automattic\WooCommerce\Blocks\Package' ) ) {
-	require dirname( __FILE__ ) . '/woocommerce-blocks-integration.php';
-	add_action(
-		'woocommerce_blocks_checkout_block_registration',
-		function( $integration_registry ) {
-			$integration_registry->register( new Newsletter_Blocks_Integration() );
-		},
-		10,
-		1
-	);
 
-	add_action(
-		'woocommerce_blocks_checkout_update_order_from_request',
-		function( $order, $request ) {
-			$optin = $request['extensions']['automatewoo'][ 'optin' ];
-			// your logic
-		},
-		10,
-		2
-	);
-}
+add_action( 'plugins_loaded', function() {
+	if ( class_exists( '\Automattic\WooCommerce\Blocks\Package' ) ) {
+		require dirname( __FILE__ ) . '/woocommerce-blocks-integration.php';
+		add_action(
+			'woocommerce_blocks_checkout_block_registration',
+			function( $integration_registry ) {
+				$integration_registry->register( new Newsletter_Blocks_Integration() );
+			},
+			10,
+			1
+		);
+	
+		add_action(
+			'woocommerce_blocks_checkout_update_order_from_request',
+			function( $order, $request ) {
+				$optin = $request['extensions']['automatewoo'][ 'optin' ];
+				// your logic
+			},
+			10,
+			2
+		);
+	}
+} );

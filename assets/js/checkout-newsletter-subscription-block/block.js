@@ -3,8 +3,11 @@
  */
 import { useEffect, useState } from '@wordpress/element';
 import { CheckboxControl } from '@woocommerce/blocks-checkout';
+import { getSetting } from '@woocommerce/settings';
 
-const Block = ( { text, checkoutExtensionData } ) => {
+const { optinDefaultText } = getSetting( 'newsletter-test_data', '' );
+
+const Block = ( { children, checkoutExtensionData } ) => {
 	const [ checked, setChecked ] = useState( false );
 	const { setExtensionData } = checkoutExtensionData;
 
@@ -18,11 +21,7 @@ const Block = ( { text, checkoutExtensionData } ) => {
 			checked={ checked }
 			onChange={ setChecked }
 		>
-			<span
-				dangerouslySetInnerHTML={ {
-					__html: text,
-				} }
-			/>
+			{ children || optinDefaultText }
 		</CheckboxControl>
 	);
 };
