@@ -3,6 +3,8 @@
 use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
 use Automattic\WooCommerce\Blocks\Package;
 use Automattic\WooCommerce\Blocks\Domain\Services\ExtendRestApi;
+use Automattic\WooCommerce\StoreApi\StoreApi;
+use Automattic\WooCommerce\StoreApi\Schemas\ExtendSchema;
 use Automattic\WooCommerce\Blocks\StoreApi\Schemas\CheckoutSchema;
 
 defined( 'ABSPATH' ) || exit;
@@ -181,3 +183,19 @@ class Newsletter_Blocks_Integration implements IntegrationInterface {
 		return NEWSLETTER_VERSION;
 	}
 }
+
+add_action('woocommerce_blocks_loaded', function() {
+		/**
+		 * A cart update endpoint to get the VAT number after it has been typed and check for
+		 * vat excepmption while on the checkout form.
+		 */
+		$extend = StoreApi::container()->get( ExtendSchema::class );
+		$extend->register_update_callback(
+			array(
+				'namespace' => 'woocommerce-newsletter-plugin',
+				'callback'  => function( $data ) {
+					
+				},
+			)
+		);
+});
