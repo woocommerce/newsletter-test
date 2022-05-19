@@ -1,7 +1,7 @@
 ### Example of integrating with inner blocks in the WooCommerce Blocks Checkout
 
 This repository contains some example code showing how an extension can register an inner block for use in the Checkout
-Block offered by WooCommerce Blocks.
+Block offered by [WooCommerce Blocks](https://github.com/woocommerce/woocommerce-blocks).
 
 To integrate a front-end block with WooCommerce Blocks that extends the API, work is required in two areas:
 Server-side code that extends the `StoreApi` and front-end code that renders and controls your block.
