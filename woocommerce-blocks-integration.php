@@ -1,9 +1,9 @@
 <?php
 
 use Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface;
-use Automattic\WooCommerce\Blocks\Package;
-use Automattic\WooCommerce\Blocks\Domain\Services\ExtendRestApi;
 use Automattic\WooCommerce\Blocks\StoreApi\Schemas\CheckoutSchema;
+use Automattic\WooCommerce\StoreApi\Schemas\ExtendSchema;
+use Automattic\WooCommerce\StoreApi\StoreApi;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -139,8 +139,8 @@ class Newsletter_Blocks_Integration implements IntegrationInterface {
 	 * Add schema Store API to support posted data.
 	 */
 	public function extend_store_api() {
-		$extend = Package::container()->get(
-			ExtendRestApi::class
+		$extend = StoreApi::container()->get(
+			ExtendSchema::class
 		);
 
 		$extend->register_endpoint_data(
