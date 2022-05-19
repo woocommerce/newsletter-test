@@ -39,8 +39,8 @@ signup block should appear in the `Contact Information` block the parent we defi
 
 Then we create our React component as normal, in this example we have an entry point defined in webpack for the
 [`frontend.js`](https://github.com/woocommerce/newsletter-test/blob/main/assets/js/checkout-newsletter-subscription-block/frontend.js) 
-file which calls `registerCheckoutBlock` - More information on this can be found at the following URL:
-https://github.com/woocommerce/woocommerce-blocks/blob/trunk/packages/checkout/blocks-registry/README.md#registercheckoutblock-options-
+file which calls `registerCheckoutBlock` - More information on this can be found on the [Registering a Block Component](https://github.com/woocommerce/woocommerce-blocks/blob/trunk/packages/checkout/blocks-registry/README.md#registercheckoutblock-options-) documentation on WooCommerce Blocks.
+
 
 As mentioned in the WooCommerce Blocks documentation, the block registered will receive attributes, as defined in
 `block.json` and will and have access to any public context providers under the Checkout context.
