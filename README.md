@@ -28,7 +28,6 @@ https://github.com/woocommerce/newsletter-test/blob/main/newsletter-test.php#L26
 [extends the API schema](https://github.com/woocommerce/newsletter-test/blob/main/woocommerce-blocks-integration.php#L141).
   - Using the `register_endpoint_data` method on `ExtendSchema` the extension causes the cart endpoint to return
 additional data. More information on this can be found at this URL: https://github.com/woocommerce/woocommerce-blocks/blob/trunk/docs/extensibility/extend-rest-api-add-data.md
-- Moving
 
 #### JavaScript
 
