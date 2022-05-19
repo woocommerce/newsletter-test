@@ -46,7 +46,7 @@ As mentioned in the WooCommerce Blocks documentation, the block registered will 
 `block.json` and will and have access to any public context providers under the Checkout context.
 
 What this means in practice, is you will have access to the `checkoutExtensionData` object, which contains a function
-called `setExtensionData` when this is executed, it sets data in the Checkout context under your extension's namespace.
+called `setExtensionData`; when this function is executed, it sets data in the Checkout context under your extension's namespace.
 
 The signature for this method is: `setExtensionData( namespace: string, key: string, value: any )` but note the value
 should be serializable as it gets sent to the API when submitting the checkout form!
