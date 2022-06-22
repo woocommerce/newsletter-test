@@ -13,7 +13,8 @@
   },
   "archive": {
     "exclude": [
-      "!/build"
+      "!/build",
+      "node_modules"
     ]
   }
 }
