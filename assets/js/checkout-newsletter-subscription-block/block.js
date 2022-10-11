@@ -35,14 +35,15 @@ const Block = ( { children, checkoutExtensionData } ) => {
 		setExtensionData,
 	] );
 
-	const { getValidationError } = useSelect( ( select ) => {
-		const store = select( 'wc/store/validation' );
-		return {
-			getValidationError: store.getValidationError(),
-		};
-	} );
 
-	const errorMessage = getValidationError( 'newsletter-test' )?.message;
+	// const { getValidationError } = useSelect( ( select ) => {
+	// 	const store = select( 'wc/store/validation' );
+	// 	return {
+	// 		getValidationError: store.getValidationError(),
+	// 	};
+	// } );
+
+	// const errorMessage = getValidationError( 'newsletter-test' )?.message;
 
 	return (
 		<>
@@ -54,14 +55,14 @@ const Block = ( { children, checkoutExtensionData } ) => {
 				{ children || optinDefaultText }
 			</CheckboxControl>
 
-			{ errorMessage && (
+			{/* { errorMessage && (
 				<div>
 					<span role="img" aria-label="Warning emoji">
 						⚠️
 					</span>
 					{ errorMessage }
 				</div>
-			) }
+			) } */}
 		</>
 	);
 };
