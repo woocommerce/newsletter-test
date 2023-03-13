@@ -1,3 +1,10 @@
+# This repository is no longer maintained
+We recommend using the [@woocommerce/extend-cart-checkout-block](https://www.npmjs.com/package/@woocommerce/extend-cart-checkout-block) tool for trying out the integrations points offered by the Cart and Checkout blocks.
+
+For feedback or feature requests for the Cart and Checkout blocks we encourage opening [a new issue](https://github.com/woocommerce/woocommerce-blocks/issues/new/choose) on the WooCommerce Blocks repo.
+
+--------------
+
 ### Example of integrating with inner blocks in the WooCommerce Blocks Checkout
 
 This repository contains some example code showing how an extension can register an inner block for use in the Checkout
